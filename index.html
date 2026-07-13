@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +8,13 @@
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome for beautiful icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <script>
         tailwind.config = {
             theme: {
@@ -47,781 +49,893 @@
         ::-webkit-scrollbar {
             width: 8px;
         }
+
         ::-webkit-scrollbar-track {
             background: #0b0f19;
         }
+
         ::-webkit-scrollbar-thumb {
             background: #1f2937;
             border-radius: 4px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: #4f46e5;
         }
+
         .hero-gradient {
             background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.15) 0%, rgba(11, 15, 25, 0) 50%);
         }
     </style>
 </head>
-<body class="bg-dark-900 text-gray-100 font-sans min-h-screen flex flex-col overflow-x-hidden selection:bg-brand-500 selection:text-white">
 
-<div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm w-full px-4 sm:px-0"></div>
+<body
+    class="bg-dark-900 text-gray-100 font-sans min-h-screen flex flex-col overflow-x-hidden selection:bg-brand-500 selection:text-white">
 
-<header class="sticky top-0 z-40 bg-dark-900/90 backdrop-blur-md border-b border-gray-800 transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-20">
-            <!-- Brand Logo -->
-            <div class="flex items-center gap-3">
-                <div class="relative flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-600 to-brand-500 shadow-lg shadow-brand-500/25">
-                    <i class="fa-solid fa-paper-plane text-white text-lg rotate-12"></i>
-                </div>
-                <div>
-                    <span class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-white via-indigo-200 to-brand-500 bg-clip-text text-transparent">ToolsKite</span>
-                    <span class="block text-[10px] text-gray-400 font-medium tracking-widest uppercase">by Prosolver HQ</span>
-                </div>
-            </div>
-
-            <!-- Navigation Links -->
-            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
-                <a href="#hero" class="hover:text-brand-500 transition-colors">Home</a>
-                <a href="#catalog" class="hover:text-brand-500 transition-colors">Browse Tools</a>
-                <a href="#features" class="hover:text-brand-500 transition-colors">Why ToolsKite</a>
-                <a href="#pricing-info" class="hover:text-brand-500 transition-colors">Licensing</a>
-                <a href="#footer" class="hover:text-brand-500 transition-colors">Contact</a>
-            </nav>
-
-            <!-- Actions Header -->
-            <div class="flex items-center gap-4">
-                <!-- Cart Trigger button -->
-                <button onclick="toggleCartDrawer(true)" class="relative p-2.5 rounded-lg border border-gray-800 bg-dark-800/50 text-gray-300 hover:bg-dark-800 hover:text-white transition-all">
-                    <i class="fa-solid fa-shopping-cart text-lg"></i>
-                    <span id="cart-badge" class="absolute -top-1.5 -right-1.5 flex items-center justify-center min-w-5 h-5 px-1 bg-brand-500 text-white text-[10px] font-bold rounded-full border-2 border-dark-900 hidden">0</span>
-                </button>
-
-                <!-- Premium Live Chat/Inquiry Quick Trigger - Linked directly to WhatsApp -->
-                <a href="https://wa.me/8801700000000?text=Hi%20ToolsKite%2C%20I%20need%20support%20with%20a%20plugin/theme!" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-500/20 transition-all">
-                    <i class="fa-brands fa-whatsapp text-base"></i>
-                    <span>WhatsApp Support</span>
-                </a>
-
-                <!-- Mobile menu toggle -->
-                <button id="mobile-menu-btn" class="md:hidden p-2.5 rounded-lg border border-gray-800 bg-dark-800/50 text-gray-300 hover:bg-dark-800" onclick="toggleMobileMenu()">
-                    <i class="fa-solid fa-bars text-lg"></i>
-                </button>
-            </div>
-        </div>
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm w-full px-4 sm:px-0">
     </div>
 
-    <!-- Mobile Navigation Panel -->
-    <div id="mobile-menu" class="hidden md:hidden border-t border-gray-800 bg-dark-900 px-4 py-4 space-y-3">
-        <a href="#hero" onclick="toggleMobileMenu()" class="block px-4 py-2 text-sm text-gray-300 hover:bg-dark-800 rounded-lg">Home</a>
-        <a href="#catalog" onclick="toggleMobileMenu()" class="block px-4 py-2 text-sm text-gray-300 hover:bg-dark-800 rounded-lg">Browse Tools</a>
-        <a href="#features" onclick="toggleMobileMenu()" class="block px-4 py-2 text-sm text-gray-300 hover:bg-dark-800 rounded-lg">Why ToolsKite</a>
-        <a href="#pricing-info" onclick="toggleMobileMenu()" class="block px-4 py-2 text-sm text-gray-300 hover:bg-dark-800 rounded-lg">Licensing</a>
-        <a href="https://wa.me/8801700000000?text=Hi%20ToolsKite%2C%20I%20need%20support%20with%20a%20plugin/theme!" target="_blank" rel="noopener noreferrer" onclick="toggleMobileMenu()" class="block px-4 py-2 text-sm text-emerald-400 hover:bg-dark-800 rounded-lg flex items-center gap-2">
-            <i class="fa-brands fa-whatsapp text-base"></i> WhatsApp Support
-        </a>
-        <div class="pt-2 border-t border-gray-800">
-            <a href="https://wa.me/8801700000000?text=Hi%20ToolsKite%2C%20I%20would%20like%20a%20custom%20consultation!" target="_blank" rel="noopener noreferrer" onclick="toggleMobileMenu()" class="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-emerald-600 text-white text-sm font-bold hover:bg-emerald-500 transition-all">
-                <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
-            </a>
-        </div>
-    </div>
-</header>
+    <header
+        class="sticky top-0 z-40 bg-dark-900/90 backdrop-blur-md border-b border-gray-800 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand Logo -->
+                <div class="flex items-center gap-3">
+                    <div
+                        class="relative flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-600 to-brand-500 shadow-lg shadow-brand-500/25">
+                        <i class="fa-solid fa-paper-plane text-white text-lg rotate-12"></i>
+                    </div>
+                    <div>
+                        <span
+                            class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-white via-indigo-200 to-brand-500 bg-clip-text text-transparent">ToolsKite</span>
+                        <span class="block text-[10px] text-gray-400 font-medium tracking-widest uppercase">by Prosolver
+                            HQ</span>
+                    </div>
+                </div>
 
-<section id="hero" class="relative overflow-hidden pt-12 pb-24 md:py-32 hero-gradient">
-    <!-- Visual background blobs -->
-    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-500/10 rounded-full blur-[100px] pointer-events-none"></div>
-    <div class="absolute top-10 right-10 w-72 h-72 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none"></div>
+                <!-- Navigation Links -->
+                <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
+                    <a href="#hero" class="hover:text-brand-500 transition-colors">Home</a>
+                    <a href="#catalog" class="hover:text-brand-500 transition-colors">Browse Tools</a>
+                    <a href="#features" class="hover:text-brand-500 transition-colors">Why ToolsKite</a>
+                    <a href="#pricing-info" class="hover:text-brand-500 transition-colors">Licensing</a>
+                    <a href="#footer" class="hover:text-brand-500 transition-colors">Contact</a>
+                </nav>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div class="text-center max-w-3xl mx-auto space-y-6">
-            <!-- Badge -->
-            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-100 text-xs font-semibold tracking-wider uppercase">
-                <span class="flex h-2 w-2 rounded-full bg-brand-accent animate-ping"></span>
-                <span>Prosolver HQ Venture</span>
-            </div>
+                <!-- Actions Header -->
+                <div class="flex items-center gap-4">
+                    <!-- Cart Trigger button -->
+                    <button onclick="toggleCartDrawer(true)"
+                        class="relative p-2.5 rounded-lg border border-gray-800 bg-dark-800/50 text-gray-300 hover:bg-dark-800 hover:text-white transition-all">
+                        <i class="fa-solid fa-shopping-cart text-lg"></i>
+                        <span id="cart-badge"
+                            class="absolute -top-1.5 -right-1.5 flex items-center justify-center min-w-5 h-5 px-1 bg-brand-500 text-white text-[10px] font-bold rounded-full border-2 border-dark-900 hidden">0</span>
+                    </button>
 
-            <!-- Title -->
-            <h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-tight sm:leading-none">
-                Elevate Your Digital Craft with <span class="bg-gradient-to-r from-brand-100 via-indigo-300 to-brand-500 bg-clip-text text-transparent">ToolsKite</span>
-            </h1>
+                    <!-- Premium Live Chat/Inquiry Quick Trigger - Linked directly to WhatsApp -->
+                    <a href="https://wa.me/880158164121" target="_blank" rel="noopener noreferrer"
+                        class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-500/20 transition-all">
+                        <i class="fa-brands fa-whatsapp text-base"></i>
+                        <span>WhatsApp Support</span>
+                    </a>
 
-            <!-- Subtitle -->
-            <p class="text-base sm:text-lg text-gray-400 font-normal">
-                Curated premium WordPress themes, advanced Elementor extensions, elite Adobe plugin packages, and creative template solutions. Securely authenticated and backed by 24/7 technical support.
-            </p>
-
-            <!-- Interactive Search Box -->
-            <div class="pt-4 max-w-xl mx-auto">
-                <div class="relative p-1.5 rounded-2xl bg-dark-800/80 border border-gray-800 shadow-2xl focus-within:border-brand-500 transition-all flex items-center">
-                    <span class="pl-4 text-gray-500">
-                        <i class="fa-solid fa-magnifying-glass text-lg"></i>
-                    </span>
-                    <input 
-                        type="text" 
-                        id="hero-search" 
-                        oninput="handleSearch(this.value)"
-                        placeholder="Search Elementor, Adobe tools, themes..." 
-                        class="w-full bg-transparent border-0 outline-none focus:ring-0 text-white px-3 py-3 text-sm placeholder-gray-500"
-                    />
-                    <button onclick="scrollToCatalog()" class="px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition-all shadow-lg shadow-brand-600/15">
-                        Search
+                    <!-- Mobile menu toggle -->
+                    <button id="mobile-menu-btn"
+                        class="md:hidden p-2.5 rounded-lg border border-gray-800 bg-dark-800/50 text-gray-300 hover:bg-dark-800"
+                        onclick="toggleMobileMenu()">
+                        <i class="fa-solid fa-bars text-lg"></i>
                     </button>
                 </div>
-                <div class="flex justify-center flex-wrap gap-2.5 mt-4 text-xs text-gray-400">
-                    <span>Popular search:</span>
-                    <button onclick="applySearchTag('Elementor Pro')" class="underline hover:text-brand-500">Elementor Pro</button>
-                    <span>•</span>
-                    <button onclick="applySearchTag('CartFlows')" class="underline hover:text-brand-500">CartFlows</button>
-                    <span>•</span>
-                    <button onclick="applySearchTag('Photoshop')" class="underline hover:text-brand-500">Adobe Photoshop</button>
-                    <span>•</span>
-                    <button onclick="applySearchTag('Astra')" class="underline hover:text-brand-500">Astra</button>
-                </div>
             </div>
         </div>
 
-        <!-- Featured Statistics Section -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mt-20 p-6 rounded-2xl bg-dark-800/40 border border-gray-800/80 backdrop-blur-sm text-center">
-            <div>
-                <span class="block text-2xl md:text-3xl font-extrabold text-white">450+</span>
-                <span class="text-xs text-gray-400 mt-1 block">Premium Digital Tools</span>
-            </div>
-            <div class="border-l border-gray-800/80">
-                <span class="block text-2xl md:text-3xl font-extrabold text-brand-500">12k+</span>
-                <span class="text-xs text-gray-400 mt-1 block">Satisfied Creators</span>
-            </div>
-            <div class="border-l border-gray-800/80">
-                <span class="block text-2xl md:text-3xl font-extrabold text-white">100%</span>
-                <span class="text-xs text-gray-400 mt-1 block">Secure GPL & Licenced</span>
-            </div>
-            <div class="border-l border-gray-800/80">
-                <span class="block text-2xl md:text-3xl font-extrabold text-brand-accent">24/7</span>
-                <span class="text-xs text-gray-400 mt-1 block">Prosolver HQ Assistance</span>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="catalog" class="py-16 bg-dark-900 border-t border-gray-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <!-- Header area -->
-        <div class="md:flex md:items-end md:justify-between mb-10">
-            <div>
-                <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Our Handpicked Inventory</h2>
-                <p class="mt-2 text-gray-400 max-w-xl">
-                    Discover fully tested tools, themes, plugins and creators' toolkits for immediate download. Filter to search exactly what fits your projects.
-                </p>
-            </div>
-            <!-- Search status or reset -->
-            <div id="filter-status" class="mt-4 md:mt-0 text-sm text-gray-400 hidden">
-                Showing results for <span id="filter-query-text" class="text-brand-500 font-semibold"></span> 
-                <button onclick="resetSearchAndFilters()" class="ml-2 underline text-xs text-red-400 hover:text-red-300">Clear all</button>
-            </div>
-        </div>
-
-        <!-- Filter Navigation Controls -->
-        <div class="flex flex-wrap items-center justify-between gap-4 mb-8 pb-4 border-b border-gray-800/80">
-            <div class="flex flex-wrap gap-2" id="category-filters">
-                <button onclick="filterCategory('all')" id="cat-all" class="filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-brand-600 text-white shadow-md">
-                    All Products
-                </button>
-                <button onclick="filterCategory('web-tools')" id="cat-web-tools" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-dark-800 text-gray-400 hover:text-white border border-gray-800">
-                    WordPress & Web Tools
-                </button>
-                <button onclick="filterCategory('creative-tools')" id="cat-creative-tools" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-dark-800 text-gray-400 hover:text-white border border-gray-800">
-                    Adobe Plugins & Assets
-                </button>
-                <button onclick="filterCategory('themes-templates')" id="cat-themes-templates" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-dark-800 text-gray-400 hover:text-white border border-gray-800">
-                    Themes & Templates
-                </button>
-            </div>
-
-            <!-- Licensing/Price Quick Toggles -->
-            <div class="flex items-center gap-2 bg-dark-800 p-1.5 rounded-xl border border-gray-800 text-xs">
-                <button id="toggle-all-pricing" onclick="filterPricing('all')" class="pricing-btn px-3 py-1.5 rounded-lg font-semibold bg-brand-500/10 text-brand-100">All Deals</button>
-                <button id="toggle-paid" onclick="filterPricing('premium')" class="pricing-btn px-3 py-1.5 rounded-lg text-gray-400 hover:text-white">Premium</button>
-                <button id="toggle-free" onclick="filterPricing('free')" class="pricing-btn px-3 py-1.5 rounded-lg text-gray-400 hover:text-white">Freebies</button>
-            </div>
-        </div>
-
-        <!-- Products Grid -->
-        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            <!-- Dynamic products will be rendered here by Javascript -->
-        </div>
-
-        <!-- Empty state -->
-        <div id="no-products-state" class="hidden text-center py-20 bg-dark-800/30 rounded-3xl border border-gray-800/80 mt-6">
-            <i class="fa-solid fa-box-open text-gray-600 text-5xl mb-4"></i>
-            <h3 class="text-lg font-bold text-white">No tools found matching your request</h3>
-            <p class="text-gray-400 text-sm mt-1 max-w-sm mx-auto">Try resetting filters or adjusting search queries to locate your digital assets.</p>
-            <button onclick="resetSearchAndFilters()" class="mt-6 px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition-all">
-                Reset Searches
-            </button>
-        </div>
-    </div>
-</section>
-
-<section id="features" class="py-20 bg-dark-800/30 border-t border-gray-800 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <span class="text-xs font-extrabold text-brand-500 uppercase tracking-widest">Built For Excellence</span>
-            <h2 class="text-3xl sm:text-4xl font-bold mt-2 text-white">Why Select ToolsKite?</h2>
-            <p class="text-gray-400 mt-4 text-base">
-                ToolsKite is not just another digital retail shop; we are backed by the tech mastery of Prosolver HQ to guarantee a flawless web setup experience.
-            </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Feature 1 -->
-            <div class="p-8 rounded-2xl bg-dark-800/80 border border-gray-800/80 hover:border-brand-500/40 transition-all group">
-                <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 text-brand-500 flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
-                    <i class="fa-solid fa-shield-halved"></i>
-                </div>
-                <h3 class="text-lg font-bold text-white mb-2">100% Virus & Malware Free</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">
-                    Every elementor plugin, WordPress theme, and creative bundle goes through automated rigorous scanning cycles using customized Prosolver core tools.
-                </p>
-            </div>
-
-            <!-- Feature 2 -->
-            <div class="p-8 rounded-2xl bg-dark-800/80 border border-gray-800/80 hover:border-brand-500/40 transition-all group">
-                <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
-                    <i class="fa-solid fa-rotate-right"></i>
-                </div>
-                <h3 class="text-lg font-bold text-white mb-2">Instant Global Delivery</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">
-                    No waiting lines. Once your download is generated or checked out, you acquire direct drive-links or file packages embedded cleanly inside your email portal.
-                </p>
-            </div>
-
-            <!-- Feature 3 -->
-            <div class="p-8 rounded-2xl bg-dark-800/80 border border-gray-800/80 hover:border-brand-500/40 transition-all group">
-                <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-brand-accent flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
-                    <i class="fa-solid fa-cubes-stacked"></i>
-                </div>
-                <h3 class="text-lg font-bold text-white mb-2">GPL/Creative Commons Ready</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">
-                    Our WordPress products and plugins operate fully under verified GPL terms. Build beautiful sites and execute creative edits without complex legal loops.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="pricing-info" class="py-16 bg-dark-900 border-t border-gray-800/80">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="p-8 md:p-12 rounded-3xl bg-gradient-to-br from-dark-800 to-dark-900 border border-gray-800 flex flex-col lg:flex-row items-center justify-between gap-8 relative overflow-hidden">
-            <div class="absolute -right-32 -bottom-32 w-96 h-96 bg-brand-500/5 rounded-full blur-3xl pointer-events-none"></div>
-            
-            <div class="max-w-2xl">
-                <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-xs font-semibold mb-4">
-                    <i class="fa-solid fa-circle-check"></i> Affordable & Authentic Licenses
-                </div>
-                <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight">Need Multiple Licences For Clients?</h2>
-                <p class="text-gray-400 text-sm sm:text-base mt-2">
-                    Are you a software agency or individual web freelancer looking to purchase bulk licences of Elementor, Divi elements, or custom templates? Prosolver HQ provides custom API licenses for development environments.
-                </p>
-                <div class="flex flex-wrap gap-4 mt-6">
-                    <div class="flex items-center gap-2 text-xs text-gray-300 bg-dark-900/80 px-3 py-2 rounded-lg border border-gray-800">
-                        <i class="fa-solid fa-check text-brand-accent"></i> Core Updates Handled
-                    </div>
-                    <div class="flex items-center gap-2 text-xs text-gray-300 bg-dark-900/80 px-3 py-2 rounded-lg border border-gray-800">
-                        <i class="fa-solid fa-check text-brand-accent"></i> Live API Validations
-                    </div>
-                    <div class="flex items-center gap-2 text-xs text-gray-300 bg-dark-900/80 px-3 py-2 rounded-lg border border-gray-800">
-                        <i class="fa-solid fa-check text-brand-accent"></i> Agency White-Label support
-                    </div>
-                </div>
-            </div>
-            
-            <div class="w-full lg:w-auto shrink-0 flex flex-col sm:flex-row gap-4">
-                <a href="#footer" class="w-full sm:w-auto text-center px-6 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm transition-all shadow-lg shadow-brand-500/25">
-                    Contact Enterprise HQ
+        <!-- Mobile Navigation Panel -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-gray-800 bg-dark-900 px-4 py-4 space-y-3">
+            <a href="#hero" onclick="toggleMobileMenu()"
+                class="block px-4 py-2 text-sm text-gray-300 hover:bg-dark-800 rounded-lg">Home</a>
+            <a href="#catalog" onclick="toggleMobileMenu()"
+                class="block px-4 py-2 text-sm text-gray-300 hover:bg-dark-800 rounded-lg">Browse Tools</a>
+            <a href="#features" onclick="toggleMobileMenu()"
+                class="block px-4 py-2 text-sm text-gray-300 hover:bg-dark-800 rounded-lg">Why ToolsKite</a>
+            <a href="#pricing-info" onclick="toggleMobileMenu()"
+                class="block px-4 py-2 text-sm text-gray-300 hover:bg-dark-800 rounded-lg">Licensing</a>
+            <a href="https://wa.me/880158164121" target="_blank" rel="noopener noreferrer" onclick="toggleMobileMenu()"
+                class="block px-4 py-2 text-sm text-emerald-400 hover:bg-dark-800 rounded-lg flex items-center gap-2">
+                <i class="fa-brands fa-whatsapp text-base"></i> WhatsApp Support
+            </a>
+            <div class="pt-2 border-t border-gray-800">
+                <a href="https://wa.me/880158164121?text=Hi%20ToolsKite%2C%20I%20would%20like%20a%20custom%20consultation!"
+                    target="_blank" rel="noopener noreferrer" onclick="toggleMobileMenu()"
+                    class="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-emerald-600 text-white text-sm font-bold hover:bg-emerald-500 transition-all">
+                    <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
                 </a>
-                <button onclick="scrollToCatalog()" class="w-full sm:w-auto text-center px-6 py-3.5 rounded-xl bg-dark-800 hover:bg-dark-700 border border-gray-700 text-gray-300 font-bold text-sm transition-all">
-                    Browse All Deals
+            </div>
+        </div>
+    </header>
+
+    <section id="hero" class="relative overflow-hidden pt-12 pb-24 md:py-32 hero-gradient">
+        <!-- Visual background blobs -->
+        <div
+            class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-500/10 rounded-full blur-[100px] pointer-events-none">
+        </div>
+        <div class="absolute top-10 right-10 w-72 h-72 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="text-center max-w-3xl mx-auto space-y-6">
+                <!-- Badge -->
+                <div
+                    class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-100 text-xs font-semibold tracking-wider uppercase">
+                    <span class="flex h-2 w-2 rounded-full bg-brand-accent animate-ping"></span>
+                    <span>Prosolver HQ Venture</span>
+                </div>
+
+                <!-- Title -->
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-tight sm:leading-none">
+                    Elevate Your Digital Craft with <span
+                        class="bg-gradient-to-r from-brand-100 via-indigo-300 to-brand-500 bg-clip-text text-transparent">ToolsKite</span>
+                </h1>
+
+                <!-- Subtitle -->
+                <p class="text-base sm:text-lg text-gray-400 font-normal">
+                    Curated premium WordPress themes, advanced Elementor extensions, elite Adobe plugin packages, and
+                    creative template solutions. Securely authenticated and backed by 24/7 technical support.
+                </p>
+
+                <!-- Interactive Search Box -->
+                <div class="pt-4 max-w-xl mx-auto">
+                    <div
+                        class="relative p-1.5 rounded-2xl bg-dark-800/80 border border-gray-800 shadow-2xl focus-within:border-brand-500 transition-all flex items-center">
+                        <span class="pl-4 text-gray-500">
+                            <i class="fa-solid fa-magnifying-glass text-lg"></i>
+                        </span>
+                        <input type="text" id="hero-search" oninput="handleSearch(this.value)"
+                            placeholder="Search Elementor, Adobe tools, themes..."
+                            class="w-full bg-transparent border-0 outline-none focus:ring-0 text-white px-3 py-3 text-sm placeholder-gray-500" />
+                        <button onclick="scrollToCatalog()"
+                            class="px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition-all shadow-lg shadow-brand-600/15">
+                            Search
+                        </button>
+                    </div>
+                    <div class="flex justify-center flex-wrap gap-2.5 mt-4 text-xs text-gray-400">
+                        <span>Popular search:</span>
+                        <button onclick="applySearchTag('Elementor Pro')"
+                            class="underline hover:text-brand-500">Elementor Pro</button>
+                        <span>•</span>
+                        <button onclick="applySearchTag('CartFlows')"
+                            class="underline hover:text-brand-500">CartFlows</button>
+                        <span>•</span>
+                        <button onclick="applySearchTag('Photoshop')" class="underline hover:text-brand-500">Adobe
+                            Photoshop</button>
+                        <span>•</span>
+                        <button onclick="applySearchTag('Astra')" class="underline hover:text-brand-500">Astra</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Statistics Section -->
+            <div
+                class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mt-20 p-6 rounded-2xl bg-dark-800/40 border border-gray-800/80 backdrop-blur-sm text-center">
+                <div>
+                    <span class="block text-2xl md:text-3xl font-extrabold text-white">450+</span>
+                    <span class="text-xs text-gray-400 mt-1 block">Premium Digital Tools</span>
+                </div>
+                <div class="border-l border-gray-800/80">
+                    <span class="block text-2xl md:text-3xl font-extrabold text-brand-500">12k+</span>
+                    <span class="text-xs text-gray-400 mt-1 block">Satisfied Creators</span>
+                </div>
+                <div class="border-l border-gray-800/80">
+                    <span class="block text-2xl md:text-3xl font-extrabold text-white">100%</span>
+                    <span class="text-xs text-gray-400 mt-1 block">Secure GPL & Licenced</span>
+                </div>
+                <div class="border-l border-gray-800/80">
+                    <span class="block text-2xl md:text-3xl font-extrabold text-brand-accent">24/7</span>
+                    <span class="text-xs text-gray-400 mt-1 block">Prosolver HQ Assistance</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="catalog" class="py-16 bg-dark-900 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- Header area -->
+            <div class="md:flex md:items-end md:justify-between mb-10">
+                <div>
+                    <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Our Handpicked Inventory</h2>
+                    <p class="mt-2 text-gray-400 max-w-xl">
+                        Discover fully tested tools, themes, plugins and creators' toolkits for immediate download.
+                        Filter to search exactly what fits your projects.
+                    </p>
+                </div>
+                <!-- Search status or reset -->
+                <div id="filter-status" class="mt-4 md:mt-0 text-sm text-gray-400 hidden">
+                    Showing results for <span id="filter-query-text" class="text-brand-500 font-semibold"></span>
+                    <button onclick="resetSearchAndFilters()"
+                        class="ml-2 underline text-xs text-red-400 hover:text-red-300">Clear all</button>
+                </div>
+            </div>
+
+            <!-- Filter Navigation Controls -->
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-8 pb-4 border-b border-gray-800/80">
+                <div class="flex flex-wrap gap-2" id="category-filters">
+                    <button onclick="filterCategory('all')" id="cat-all"
+                        class="filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-brand-600 text-white shadow-md">
+                        All Products
+                    </button>
+                    <button onclick="filterCategory('web-tools')" id="cat-web-tools"
+                        class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-dark-800 text-gray-400 hover:text-white border border-gray-800">
+                        WordPress & Web Tools
+                    </button>
+                    <button onclick="filterCategory('creative-tools')" id="cat-creative-tools"
+                        class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-dark-800 text-gray-400 hover:text-white border border-gray-800">
+                        Adobe Plugins & Assets
+                    </button>
+                    <button onclick="filterCategory('themes-templates')" id="cat-themes-templates"
+                        class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-dark-800 text-gray-400 hover:text-white border border-gray-800">
+                        Themes & Templates
+                    </button>
+                </div>
+
+                <!-- Licensing/Price Quick Toggles -->
+                <div class="flex items-center gap-2 bg-dark-800 p-1.5 rounded-xl border border-gray-800 text-xs">
+                    <button id="toggle-all-pricing" onclick="filterPricing('all')"
+                        class="pricing-btn px-3 py-1.5 rounded-lg font-semibold bg-brand-500/10 text-brand-100">All
+                        Deals</button>
+                    <button id="toggle-paid" onclick="filterPricing('premium')"
+                        class="pricing-btn px-3 py-1.5 rounded-lg text-gray-400 hover:text-white">Premium</button>
+                    <button id="toggle-free" onclick="filterPricing('free')"
+                        class="pricing-btn px-3 py-1.5 rounded-lg text-gray-400 hover:text-white">Freebies</button>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Dynamic products will be rendered here by Javascript -->
+            </div>
+
+            <!-- Empty state -->
+            <div id="no-products-state"
+                class="hidden text-center py-20 bg-dark-800/30 rounded-3xl border border-gray-800/80 mt-6">
+                <i class="fa-solid fa-box-open text-gray-600 text-5xl mb-4"></i>
+                <h3 class="text-lg font-bold text-white">No tools found matching your request</h3>
+                <p class="text-gray-400 text-sm mt-1 max-w-sm mx-auto">Try resetting filters or adjusting search queries
+                    to locate your digital assets.</p>
+                <button onclick="resetSearchAndFilters()"
+                    class="mt-6 px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition-all">
+                    Reset Searches
                 </button>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<div id="product-modal" class="fixed inset-0 z-50 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-        
-        <!-- Backdrop -->
-        <div class="fixed inset-0 bg-dark-900/80 backdrop-blur-sm transition-opacity" onclick="toggleProductModal(false)"></div>
-
-        <!-- Centering trick -->
-        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-
-        <!-- Modal Box -->
-        <div class="inline-block align-bottom bg-dark-800 rounded-2xl border border-gray-700 text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full relative">
-            
-            <!-- Close Button -->
-            <button onclick="toggleProductModal(false)" class="absolute top-4 right-4 text-gray-400 hover:text-white p-2 hover:bg-dark-700 rounded-lg transition-all">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-
-            <!-- Banner / Accent -->
-            <div class="h-3 bg-gradient-to-r from-brand-600 via-indigo-500 to-brand-accent"></div>
-
-            <div class="p-6 sm:p-8 space-y-6">
-                <!-- Icon & Brand Heading -->
-                <div class="flex gap-4 items-start">
-                    <div id="modal-product-icon" class="w-16 h-16 rounded-xl bg-dark-900 border border-gray-700 flex items-center justify-center text-3xl text-brand-500 flex-shrink-0">
-                        <!-- Placed dynamically -->
-                    </div>
-                    <div>
-                        <span id="modal-product-badge" class="inline-block text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-brand-500/10 text-brand-100 mb-1 border border-brand-500/20"></span>
-                        <h3 id="modal-product-title" class="text-xl sm:text-2xl font-black text-white"></h3>
-                        <p id="modal-product-tagline" class="text-sm text-gray-400"></p>
-                    </div>
-                </div>
-
-                <!-- Product Specifications -->
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 rounded-xl bg-dark-900 border border-gray-800">
-                    <div>
-                        <span class="block text-[10px] uppercase tracking-wider text-gray-500">Current Version</span>
-                        <span id="modal-product-ver" class="text-xs font-bold text-gray-200"></span>
-                    </div>
-                    <div>
-                        <span class="block text-[10px] uppercase tracking-wider text-gray-500">Verified Files</span>
-                        <span class="text-xs font-bold text-brand-accent flex items-center gap-1">
-                            <i class="fa-solid fa-circle-check"></i> Secure
-                        </span>
-                    </div>
-                    <div>
-                        <span class="block text-[10px] uppercase tracking-wider text-gray-500">Downloads</span>
-                        <span id="modal-product-downloads" class="text-xs font-bold text-gray-200"></span>
-                    </div>
-                    <div>
-                        <span class="block text-[10px] uppercase tracking-wider text-gray-500">Support License</span>
-                        <span class="text-xs font-bold text-gray-200">GPL / Prosolver HQ</span>
-                    </div>
-                </div>
-
-                <!-- Description & Features -->
-                <div>
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Tools Features & Benefits</h4>
-                    <ul id="modal-product-features" class="space-y-2 text-sm text-gray-300">
-                        <!-- Generated Dynamically -->
-                    </ul>
-                </div>
-
-                <!-- Bottom Bar (Actions & Price) -->
-                <div class="pt-6 border-t border-gray-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <div>
-                        <span class="block text-xs text-gray-400">License Acquisition Cost</span>
-                        <span id="modal-product-price" class="text-2xl font-black text-white"></span>
-                    </div>
-                    <div class="flex gap-2">
-                        <button onclick="toggleProductModal(false)" class="px-5 py-3 rounded-xl bg-dark-900 border border-gray-700 hover:bg-dark-700 text-gray-300 text-sm font-semibold transition-all">
-                            Keep Browsing
-                        </button>
-                        <button id="modal-product-action-btn" class="px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-sm font-bold transition-all shadow-lg shadow-brand-500/25">
-                            <!-- Dynamic Content -->
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="cart-drawer" class="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-dark-800 border-l border-gray-700 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col">
-    <!-- Header -->
-    <div class="p-6 border-b border-gray-700 flex items-center justify-between">
-        <div class="flex items-center gap-2">
-            <i class="fa-solid fa-shopping-basket text-brand-500 text-xl"></i>
-            <h3 class="text-lg font-bold text-white">Your Tools Kite</h3>
-        </div>
-        <button onclick="toggleCartDrawer(false)" class="text-gray-400 hover:text-white p-2 rounded-lg hover:bg-dark-700">
-            <i class="fa-solid fa-xmark text-lg"></i>
-        </button>
-    </div>
-
-    <!-- Scrollable Items Container -->
-    <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
-        <!-- Rendered Dynamically by JS -->
-    </div>
-
-    <!-- Checkout Action Area -->
-    <div class="p-6 border-t border-gray-700 bg-dark-900/50 space-y-4">
-        <!-- Coupon Form Mockup -->
-        <div class="flex gap-2">
-            <input type="text" id="coupon-input" placeholder="PROSOLVER50" class="w-full bg-dark-900 border border-gray-700 text-xs text-white rounded-lg px-3 py-2 outline-none focus:border-brand-500">
-            <button onclick="applyCoupon()" class="px-4 py-2 bg-dark-800 border border-gray-700 hover:bg-brand-600 text-white hover:border-brand-600 font-semibold text-xs rounded-lg transition-all">Apply</button>
-        </div>
-
-        <div class="flex items-center justify-between text-sm">
-            <span class="text-gray-400">Selected Licenses:</span>
-            <span id="cart-count-val" class="text-white font-medium">0 items</span>
-        </div>
-        <div class="flex items-center justify-between text-sm">
-            <span class="text-gray-400">Discount:</span>
-            <span id="cart-discount-val" class="text-brand-accent font-semibold">$0.00</span>
-        </div>
-        <div class="flex items-center justify-between border-t border-gray-800 pt-3">
-            <span class="text-base font-bold text-white">Total Amount:</span>
-            <span id="cart-total" class="text-xl font-black text-white">$0.00</span>
-        </div>
-
-        <button onclick="executeCheckout()" class="w-full py-4 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm tracking-wide shadow-lg shadow-brand-500/25 transition-all flex items-center justify-center gap-2">
-            <span>Proceed to Download Gateway</span>
-            <i class="fa-solid fa-arrow-right"></i>
-        </button>
-
-        <p class="text-[10px] text-gray-500 text-center">
-            *Downloads are served immediately in zipped files after processing. Powered secure framework by Prosolver HQ.
-        </p>
-    </div>
-</div>
-
-<footer id="footer" class="bg-dark-800 border-t border-gray-800 mt-auto pt-16 pb-8 relative overflow-hidden">
-    <div class="absolute bottom-0 right-0 w-80 h-80 bg-brand-600/5 rounded-full blur-[100px] pointer-events-none"></div>
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-12 border-b border-gray-800">
-            
-            <!-- Branding Details -->
-            <div class="lg:col-span-5 space-y-6">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center text-white text-base">
-                        <i class="fa-solid fa-paper-plane rotate-12"></i>
-                    </div>
-                    <div>
-                        <span class="text-lg font-black text-white">ToolsKite</span>
-                        <span class="block text-[9px] text-brand-500 tracking-wider font-extrabold uppercase">PROSOLVER HQ ENTERPRISE</span>
-                    </div>
-                </div>
-
-                <p class="text-gray-400 text-sm leading-relaxed max-w-sm">
-                    ToolsKite is a dedicated portal serving developers, content creators, and marketing professionals. We provide fast digital downloads, premium support, and high-quality validated files.
+    <section id="features" class="py-20 bg-dark-800/30 border-t border-gray-800 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-extrabold text-brand-500 uppercase tracking-widest">Built For
+                    Excellence</span>
+                <h2 class="text-3xl sm:text-4xl font-bold mt-2 text-white">Why Select ToolsKite?</h2>
+                <p class="text-gray-400 mt-4 text-base">
+                    ToolsKite is not just another digital retail shop; we are backed by the tech mastery of Prosolver HQ
+                    to guarantee a flawless web setup experience.
                 </p>
-
-                <!-- Social badging -->
-                <div class="flex gap-3 text-gray-400">
-                    <a href="#" class="w-8 h-8 rounded-lg bg-dark-900 flex items-center justify-center hover:text-white hover:bg-brand-500 transition-all"><i class="fa-brands fa-facebook-f text-sm"></i></a>
-                    <a href="#" class="w-8 h-8 rounded-lg bg-dark-900 flex items-center justify-center hover:text-white hover:bg-brand-500 transition-all"><i class="fa-brands fa-twitter text-sm"></i></a>
-                    <a href="#" class="w-8 h-8 rounded-lg bg-dark-900 flex items-center justify-center hover:text-white hover:bg-brand-500 transition-all"><i class="fa-brands fa-github text-sm"></i></a>
-                    <a href="#" class="w-8 h-8 rounded-lg bg-dark-900 flex items-center justify-center hover:text-white hover:bg-brand-500 transition-all"><i class="fa-brands fa-discord text-sm"></i></a>
-                </div>
             </div>
 
-            <!-- Custom Interactive Consult / Quick Message Form -->
-            <div class="lg:col-span-4 space-y-4">
-                <h3 class="text-sm font-extrabold text-white tracking-widest uppercase">Consult Prosolver Team</h3>
-                <p class="text-xs text-gray-400">Have specific tool demands? Request a specific item, theme or plugin license directly from our tech hub.</p>
-                
-                <!-- Quick WhatsApp Action Option -->
-                <div class="p-3.5 rounded-xl bg-emerald-950/20 border border-emerald-800/30 flex items-center justify-between gap-3">
-                    <div class="flex items-center gap-2.5">
-                        <div class="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400">
-                            <i class="fa-brands fa-whatsapp text-lg"></i>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div
+                    class="p-8 rounded-2xl bg-dark-800/80 border border-gray-800/80 hover:border-brand-500/40 transition-all group">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 text-brand-500 flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">100% Virus & Malware Free</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Every elementor plugin, WordPress theme, and creative bundle goes through automated rigorous
+                        scanning cycles using customized Prosolver core tools.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div
+                    class="p-8 rounded-2xl bg-dark-800/80 border border-gray-800/80 hover:border-brand-500/40 transition-all group">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-rotate-right"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Instant Global Delivery</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        No waiting lines. Once your download is generated or checked out, you acquire direct drive-links
+                        or file packages embedded cleanly inside your email portal.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div
+                    class="p-8 rounded-2xl bg-dark-800/80 border border-gray-800/80 hover:border-brand-500/40 transition-all group">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-brand-accent flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-cubes-stacked"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">GPL/Creative Commons Ready</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Our WordPress products and plugins operate fully under verified GPL terms. Build beautiful sites
+                        and execute creative edits without complex legal loops.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing-info" class="py-16 bg-dark-900 border-t border-gray-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div
+                class="p-8 md:p-12 rounded-3xl bg-gradient-to-br from-dark-800 to-dark-900 border border-gray-800 flex flex-col lg:flex-row items-center justify-between gap-8 relative overflow-hidden">
+                <div
+                    class="absolute -right-32 -bottom-32 w-96 h-96 bg-brand-500/5 rounded-full blur-3xl pointer-events-none">
+                </div>
+
+                <div class="max-w-2xl">
+                    <div
+                        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-xs font-semibold mb-4">
+                        <i class="fa-solid fa-circle-check"></i> Affordable & Authentic Licenses
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight">Need Multiple Licences For
+                        Clients?</h2>
+                    <p class="text-gray-400 text-sm sm:text-base mt-2">
+                        Are you a software agency or individual web freelancer looking to purchase bulk licences of
+                        Elementor, Divi elements, or custom templates? Prosolver HQ provides custom API licenses for
+                        development environments.
+                    </p>
+                    <div class="flex flex-wrap gap-4 mt-6">
+                        <div
+                            class="flex items-center gap-2 text-xs text-gray-300 bg-dark-900/80 px-3 py-2 rounded-lg border border-gray-800">
+                            <i class="fa-solid fa-check text-brand-accent"></i> Core Updates Handled
+                        </div>
+                        <div
+                            class="flex items-center gap-2 text-xs text-gray-300 bg-dark-900/80 px-3 py-2 rounded-lg border border-gray-800">
+                            <i class="fa-solid fa-check text-brand-accent"></i> Live API Validations
+                        </div>
+                        <div
+                            class="flex items-center gap-2 text-xs text-gray-300 bg-dark-900/80 px-3 py-2 rounded-lg border border-gray-800">
+                            <i class="fa-solid fa-check text-brand-accent"></i> Agency White-Label support
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full lg:w-auto shrink-0 flex flex-col sm:flex-row gap-4">
+                    <a href="#footer"
+                        class="w-full sm:w-auto text-center px-6 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm transition-all shadow-lg shadow-brand-500/25">
+                        Contact Enterprise HQ
+                    </a>
+                    <button onclick="scrollToCatalog()"
+                        class="w-full sm:w-auto text-center px-6 py-3.5 rounded-xl bg-dark-800 hover:bg-dark-700 border border-gray-700 text-gray-300 font-bold text-sm transition-all">
+                        Browse All Deals
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="product-modal" class="fixed inset-0 z-50 overflow-y-auto hidden" aria-labelledby="modal-title"
+        role="dialog" aria-modal="true">
+        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+
+            <!-- Backdrop -->
+            <div class="fixed inset-0 bg-dark-900/80 backdrop-blur-sm transition-opacity"
+                onclick="toggleProductModal(false)"></div>
+
+            <!-- Centering trick -->
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+            <!-- Modal Box -->
+            <div
+                class="inline-block align-bottom bg-dark-800 rounded-2xl border border-gray-700 text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full relative">
+
+                <!-- Close Button -->
+                <button onclick="toggleProductModal(false)"
+                    class="absolute top-4 right-4 text-gray-400 hover:text-white p-2 hover:bg-dark-700 rounded-lg transition-all">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+
+                <!-- Banner / Accent -->
+                <div class="h-3 bg-gradient-to-r from-brand-600 via-indigo-500 to-brand-accent"></div>
+
+                <div class="p-6 sm:p-8 space-y-6">
+                    <!-- Icon & Brand Heading -->
+                    <div class="flex gap-4 items-start">
+                        <div id="modal-product-icon"
+                            class="w-16 h-16 rounded-xl bg-dark-900 border border-gray-700 flex items-center justify-center text-3xl text-brand-500 flex-shrink-0">
+                            <!-- Placed dynamically -->
                         </div>
                         <div>
-                            <span class="block text-xs font-bold text-white">Instant WhatsApp Chat</span>
-                            <span class="block text-[10px] text-gray-400">Get answers in 2 minutes</span>
+                            <span id="modal-product-badge"
+                                class="inline-block text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-brand-500/10 text-brand-100 mb-1 border border-brand-500/20"></span>
+                            <h3 id="modal-product-title" class="text-xl sm:text-2xl font-black text-white"></h3>
+                            <p id="modal-product-tagline" class="text-sm text-gray-400"></p>
                         </div>
                     </div>
-                    <a href="https://wa.me/8801700000000?text=Hi%20ToolsKite%20HQ%2C%20I%20have%20a%20question%20about%20your%20products." target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-bold transition-all flex items-center gap-1 shrink-0">
-                        Chat Now <i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i>
-                    </a>
-                </div>
 
-                <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-3">
-                    <div>
-                        <input type="email" id="contact-email" required placeholder="Enter your email address" class="w-full text-xs bg-dark-900 border border-gray-700 rounded-lg px-3.5 py-2.5 text-white outline-none focus:border-brand-500 placeholder-gray-500">
+                    <!-- Product Specifications -->
+                    <div
+                        class="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 rounded-xl bg-dark-900 border border-gray-800">
+                        <div>
+                            <span class="block text-[10px] uppercase tracking-wider text-gray-500">Current
+                                Version</span>
+                            <span id="modal-product-ver" class="text-xs font-bold text-gray-200"></span>
+                        </div>
+                        <div>
+                            <span class="block text-[10px] uppercase tracking-wider text-gray-500">Verified Files</span>
+                            <span class="text-xs font-bold text-brand-accent flex items-center gap-1">
+                                <i class="fa-solid fa-circle-check"></i> Secure
+                            </span>
+                        </div>
+                        <div>
+                            <span class="block text-[10px] uppercase tracking-wider text-gray-500">Downloads</span>
+                            <span id="modal-product-downloads" class="text-xs font-bold text-gray-200"></span>
+                        </div>
+                        <div>
+                            <span class="block text-[10px] uppercase tracking-wider text-gray-500">Support
+                                License</span>
+                            <span class="text-xs font-bold text-gray-200">GPL / Prosolver HQ</span>
+                        </div>
                     </div>
+
+                    <!-- Description & Features -->
                     <div>
-                        <textarea id="contact-msg" rows="2" required placeholder="Name the plugin/theme or service requested..." class="w-full text-xs bg-dark-900 border border-gray-700 rounded-lg px-3.5 py-2.5 text-white outline-none focus:border-brand-500 placeholder-gray-500"></textarea>
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Tools Features &
+                            Benefits</h4>
+                        <ul id="modal-product-features" class="space-y-2 text-sm text-gray-300">
+                            <!-- Generated Dynamically -->
+                        </ul>
                     </div>
-                    <button type="submit" class="w-full py-2.5 rounded-lg bg-dark-900 border border-gray-700 hover:border-brand-500 text-gray-300 hover:text-white text-xs font-bold transition-all flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-paper-plane text-[10px]"></i> Submit Query
-                    </button>
-                </form>
-            </div>
 
-            <!-- Navigation Links Matrix -->
-            <div class="lg:col-span-3 grid grid-cols-2 gap-4">
-                <div>
-                    <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-4">Directories</h4>
-                    <ul class="space-y-2 text-xs text-gray-400">
-                        <li><a href="#catalog" class="hover:text-brand-500 transition-all">WP Web Plugins</a></li>
-                        <li><a href="#catalog" class="hover:text-brand-500 transition-all">Adobe Suite Toolkit</a></li>
-                        <li><a href="#catalog" class="hover:text-brand-500 transition-all">Creative Assets</a></li>
-                        <li><a href="#catalog" class="hover:text-brand-500 transition-all">Free Tools Library</a></li>
-                    </ul>
+                    <!-- Bottom Bar (Actions & Price) -->
+                    <div
+                        class="pt-6 border-t border-gray-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div>
+                            <span class="block text-xs text-gray-400">License Acquisition Cost</span>
+                            <span id="modal-product-price" class="text-2xl font-black text-white"></span>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="toggleProductModal(false)"
+                                class="px-5 py-3 rounded-xl bg-dark-900 border border-gray-700 hover:bg-dark-700 text-gray-300 text-sm font-semibold transition-all">
+                                Keep Browsing
+                            </button>
+                            <button id="modal-product-action-btn"
+                                class="px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-sm font-bold transition-all shadow-lg shadow-brand-500/25">
+                                <!-- Dynamic Content -->
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-4">Support & Trust</h4>
-                    <ul class="space-y-2 text-xs text-gray-400">
-                        <li><a href="#features" class="hover:text-brand-500 transition-all">DMCA Clearance</a></li>
-                        <li><a href="#features" class="hover:text-brand-500 transition-all">License Terms</a></li>
-                        <li><a href="#features" class="hover:text-brand-500 transition-all">Refund Assurance</a></li>
-                        <li><a href="#features" class="hover:text-brand-500 transition-all">Prosolver QA Core</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Meta Copyright area -->
-        <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
-            <p>&copy; 2026 ToolsKite. All Rights Reserved. Managed and Secured under <a href="https://prosolver.co" target="_blank" class="hover:text-brand-500 underline font-semibold">Prosolver HQ</a>.</p>
-            <div class="flex gap-4">
-                <a href="#" class="hover:text-gray-300">Privacy Policy</a>
-                <span>•</span>
-                <a href="#" class="hover:text-gray-300">Terms of Use</a>
-                <span>•</span>
-                <a href="#" class="hover:text-gray-300 font-semibold text-brand-500">GPL Authenticated</a>
             </div>
         </div>
     </div>
-</footer>
 
-<!-- Floating WhatsApp Widget (Bottom-Left to avoid overlap with cart details) -->
-<a href="https://wa.me/8801700000000?text=Hello%20ToolsKite%2C%20I%27m%20visiting%20your%20website%20and%20need%20some%20help!" 
-   target="_blank" 
-   rel="noopener noreferrer" 
-   class="fixed bottom-6 left-6 z-40 flex items-center gap-2.5 bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-3 rounded-full shadow-2xl transition-all duration-300 hover:scale-105 font-bold text-sm border border-emerald-500/20 active:scale-95 group">
-    <span class="relative flex h-3 w-3">
-        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-100 opacity-75"></span>
-        <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-400"></span>
-    </span>
-    <i class="fa-brands fa-whatsapp text-lg"></i>
-    <span>Chat with Us</span>
-</a>
+    <div id="cart-drawer"
+        class="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-dark-800 border-l border-gray-700 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col">
+        <!-- Header -->
+        <div class="p-6 border-b border-gray-700 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-shopping-basket text-brand-500 text-xl"></i>
+                <h3 class="text-lg font-bold text-white">Your Tools Kite</h3>
+            </div>
+            <button onclick="toggleCartDrawer(false)"
+                class="text-gray-400 hover:text-white p-2 rounded-lg hover:bg-dark-700">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+        </div>
 
-<script>
-    // Product Database Array
-    const products = [
-        {
-            id: 'p1',
-            title: 'Elementor Pro Extension Suite',
-            tagline: 'The world\'s leading WordPress visual builder premium license.',
-            category: 'web-tools',
-            isPremium: true,
-            price: 19.00,
-            version: 'v3.18.2',
-            downloads: '4,821',
-            icon: 'fa-cubes',
-            features: [
-                'Full access to 100+ Professional widgets',
-                'Advanced Theme Builder & WooCommerce layout editor',
-                'Visual Loop Builder for dynamic custom query listings',
-                '1-Year Direct Support validation via ToolsKite'
-            ]
-        },
-        {
-            id: 'p2',
-            title: 'CartFlows Pro Sales Funnel',
-            tagline: 'High-converting sales funnel builder for WooCommerce.',
-            category: 'web-tools',
-            isPremium: true,
-            price: 24.00,
-            version: 'v2.1.0',
-            downloads: '1,902',
-            icon: 'fa-arrows-split-up-and-left',
-            features: [
-                'One-Click Upsells & Downsell triggers',
-                'Premium pre-built modern landing templates',
-                'A/B Split testing on landing layouts',
-                'Fully Optimized frictionless Checkout systems'
-            ]
-        },
-        {
-            id: 'p3',
-            title: 'Adobe Photoshop Action presets',
-            tagline: 'Advanced non-destructive editorial grade photo actions.',
-            category: 'creative-tools',
-            isPremium: false,
-            price: 0.00,
-            version: 'v4.5',
-            downloads: '12,410',
-            icon: 'fa-wand-magic-sparkles',
-            features: [
-                '50+ Dynamic high-contrast creative actions',
-                'Fully compatible with Adobe CC suite apps',
-                'Non-destructive styling templates included',
-                'Extended Commercial license for standard agencies'
-            ]
-        },
-        {
-            id: 'p4',
-            title: 'Premiere Pro Motion Transitions',
-            tagline: 'Cinematic fluid camera motion transition kits.',
-            category: 'creative-tools',
-            isPremium: true,
-            price: 15.00,
-            version: 'v2.0',
-            downloads: '840',
-            icon: 'fa-video',
-            features: [
-                '30+ Drag-and-drop smooth camera transitions',
-                'Inbuilt cinematic sound effects cues',
-                'Full HD, 4K, and Ultra-wide configuration sizes',
-                'Detailed video instruction guidebook'
-            ]
-        },
-        {
-            id: 'p5',
-            title: 'Astra Premium Theme Bundle',
-            tagline: 'Lightweight & customizable premium WordPress template catalog.',
-            category: 'themes-templates',
-            isPremium: true,
-            price: 29.00,
-            version: 'v4.3.1',
-            downloads: '3,115',
-            icon: 'fa-palette',
-            features: [
-                'Access to all 150+ starter templates & demos',
-                'Fast responsive rendering code (under 0.5s loading)',
-                'Deep integration compatibility with Elementor builder',
-                'GPL license usage for unlimited client domains'
-            ]
-        },
-        {
-            id: 'p6',
-            title: 'Divi Creative Theme & Builder',
-            tagline: 'Flexible visual theme framework with custom designs.',
-            category: 'themes-templates',
-            isPremium: true,
-            price: 29.00,
-            version: 'v4.22',
-            downloads: '2,900',
-            icon: 'fa-border-none',
-            features: [
-                'Full layout packs and premium layout modules',
-                'Inbuilt custom split testing modules',
-                'GPL Lifetime activation keys generated instantly',
-                'Full compatibility with standard plugins'
-            ]
-        },
-        {
-            id: 'p7',
-            title: 'After Effects Cyberpunk Title Presets',
-            tagline: 'Modern neon cyberpunk title animations.',
-            category: 'creative-tools',
-            isPremium: false,
-            price: 0.00,
-            version: 'v1.2',
-            downloads: '7,150',
-            icon: 'fa-clapperboard',
-            features: [
-                '15 Glitch title templates in futuristic styling',
-                'No external plugins or components required',
-                'Font list and styling resources package included',
-                'Fully customisable timing and coloring keys'
-            ]
-        },
-        {
-            id: 'p8',
-            title: 'WooCommerce Custom Checkout Booster',
-            tagline: 'Fast multi-step checkout plugin with dynamic indicators.',
-            category: 'web-tools',
-            isPremium: true,
-            price: 12.00,
-            version: 'v1.4.2',
-            downloads: '942',
-            icon: 'fa-basket-shopping',
-            features: [
-                'Convert WooCommerce cart into multi-step elegant bars',
-                'In-built order bump and progress metrics options',
-                'Pre-configured designs for minimal styled templates',
-                'Optimised mobile viewport responsive UI layers'
-            ]
-        }
-    ];
+        <!-- Scrollable Items Container -->
+        <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
+            <!-- Rendered Dynamically by JS -->
+        </div>
 
-    // Web Application State variables
-    let cart = [];
-    let activeFilter = 'all';
-    let priceFilter = 'all';
-    let searchQuery = '';
-    let couponApplied = false;
-    const couponDiscountRate = 0.5; // 50% discount
+        <!-- Checkout Action Area -->
+        <div class="p-6 border-t border-gray-700 bg-dark-900/50 space-y-4">
+            <!-- Coupon Form Mockup -->
+            <div class="flex gap-2">
+                <input type="text" id="coupon-input" placeholder="PROSOLVER50"
+                    class="w-full bg-dark-900 border border-gray-700 text-xs text-white rounded-lg px-3 py-2 outline-none focus:border-brand-500">
+                <button onclick="applyCoupon()"
+                    class="px-4 py-2 bg-dark-800 border border-gray-700 hover:bg-brand-600 text-white hover:border-brand-600 font-semibold text-xs rounded-lg transition-all">Apply</button>
+            </div>
 
-    window.onload = function() {
-        renderProducts();
-        updateCartBadge();
-    };
+            <div class="flex items-center justify-between text-sm">
+                <span class="text-gray-400">Selected Licenses:</span>
+                <span id="cart-count-val" class="text-white font-medium">0 items</span>
+            </div>
+            <div class="flex items-center justify-between text-sm">
+                <span class="text-gray-400">Discount:</span>
+                <span id="cart-discount-val" class="text-brand-accent font-semibold">$0.00</span>
+            </div>
+            <div class="flex items-center justify-between border-t border-gray-800 pt-3">
+                <span class="text-base font-bold text-white">Total Amount:</span>
+                <span id="cart-total" class="text-xl font-black text-white">$0.00</span>
+            </div>
 
-    // Show dynamic toast notifications
-    function showToast(message, type = 'success') {
-        const container = document.getElementById('toast-container');
-        const toast = document.createElement('div');
-        toast.className = `flex items-center gap-3 p-4 rounded-xl shadow-xl border text-sm transition-all duration-300 transform translate-y-2 opacity-0 bg-dark-800 ${
-            type === 'success' ? 'border-brand-accent text-white' : 'border-brand-danger text-white'
-        }`;
-        
-        const icon = type === 'success' ? 'fa-circle-check text-brand-accent' : 'fa-triangle-exclamation text-brand-danger';
-        
-        toast.innerHTML = `
+            <button onclick="executeCheckout()"
+                class="w-full py-4 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm tracking-wide shadow-lg shadow-brand-500/25 transition-all flex items-center justify-center gap-2">
+                <span>Proceed to Download Gateway</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+
+            <p class="text-[10px] text-gray-500 text-center">
+                *Downloads are served immediately in zipped files after processing. Powered secure framework by
+                Prosolver HQ.
+            </p>
+        </div>
+    </div>
+
+    <footer id="footer" class="bg-dark-800 border-t border-gray-800 mt-auto pt-16 pb-8 relative overflow-hidden">
+        <div class="absolute bottom-0 right-0 w-80 h-80 bg-brand-600/5 rounded-full blur-[100px] pointer-events-none">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-12 border-b border-gray-800">
+
+                <!-- Branding Details -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center text-white text-base">
+                            <i class="fa-solid fa-paper-plane rotate-12"></i>
+                        </div>
+                        <div>
+                            <span class="text-lg font-black text-white">ToolsKite</span>
+                            <span
+                                class="block text-[9px] text-brand-500 tracking-wider font-extrabold uppercase">PROSOLVER
+                                HQ ENTERPRISE</span>
+                        </div>
+                    </div>
+
+                    <p class="text-gray-400 text-sm leading-relaxed max-w-sm">
+                        ToolsKite is a dedicated portal serving developers, content creators, and marketing
+                        professionals. We provide fast digital downloads, premium support, and high-quality validated
+                        files.
+                    </p>
+
+                    <!-- Social badging -->
+                    <div class="flex gap-3 text-gray-400">
+                        <a href="#"
+                            class="w-8 h-8 rounded-lg bg-dark-900 flex items-center justify-center hover:text-white hover:bg-brand-500 transition-all"><i
+                                class="fa-brands fa-facebook-f text-sm"></i></a>
+                        <a href="#"
+                            class="w-8 h-8 rounded-lg bg-dark-900 flex items-center justify-center hover:text-white hover:bg-brand-500 transition-all"><i
+                                class="fa-brands fa-twitter text-sm"></i></a>
+                        <a href="#"
+                            class="w-8 h-8 rounded-lg bg-dark-900 flex items-center justify-center hover:text-white hover:bg-brand-500 transition-all"><i
+                                class="fa-brands fa-github text-sm"></i></a>
+                        <a href="#"
+                            class="w-8 h-8 rounded-lg bg-dark-900 flex items-center justify-center hover:text-white hover:bg-brand-500 transition-all"><i
+                                class="fa-brands fa-discord text-sm"></i></a>
+                    </div>
+                </div>
+
+                <!-- Custom Interactive Consult / Quick Message Form -->
+                <div class="lg:col-span-4 space-y-4">
+                    <h3 class="text-sm font-extrabold text-white tracking-widest uppercase">Consult Prosolver Team</h3>
+                    <p class="text-xs text-gray-400">Have specific tool demands? Request a specific item, theme or
+                        plugin license directly from our tech hub.</p>
+
+                    <!-- Quick WhatsApp Action Option -->
+                    <div
+                        class="p-3.5 rounded-xl bg-emerald-950/20 border border-emerald-800/30 flex items-center justify-between gap-3">
+                        <div class="flex items-center gap-2.5">
+                            <div
+                                class="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400">
+                                <i class="fa-brands fa-whatsapp text-lg"></i>
+                            </div>
+                            <div>
+                                <span class="block text-xs font-bold text-white">Instant WhatsApp Chat</span>
+                                <span class="block text-[10px] text-gray-400">Get answers in 2 minutes</span>
+                            </div>
+                        </div>
+                        <a href="https://wa.me/880158164121?text=Hi%20ToolsKite%20HQ%2C%20I%20have%20a%20question%20about%20your%20products."
+                            target="_blank" rel="noopener noreferrer"
+                            class="px-3.5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-bold transition-all flex items-center gap-1 shrink-0">
+                            Chat Now <i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i>
+                        </a>
+                    </div>
+
+                    <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-3">
+                        <div>
+                            <input type="email" id="contact-email" required placeholder="Enter your email address"
+                                class="w-full text-xs bg-dark-900 border border-gray-700 rounded-lg px-3.5 py-2.5 text-white outline-none focus:border-brand-500 placeholder-gray-500">
+                        </div>
+                        <div>
+                            <textarea id="contact-msg" rows="2" required
+                                placeholder="Name the plugin/theme or service requested..."
+                                class="w-full text-xs bg-dark-900 border border-gray-700 rounded-lg px-3.5 py-2.5 text-white outline-none focus:border-brand-500 placeholder-gray-500"></textarea>
+                        </div>
+                        <button type="submit"
+                            class="w-full py-2.5 rounded-lg bg-dark-900 border border-gray-700 hover:border-brand-500 text-gray-300 hover:text-white text-xs font-bold transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane text-[10px]"></i> Submit Query
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Navigation Links Matrix -->
+                <div class="lg:col-span-3 grid grid-cols-2 gap-4">
+                    <div>
+                        <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-4">Directories</h4>
+                        <ul class="space-y-2 text-xs text-gray-400">
+                            <li><a href="#catalog" class="hover:text-brand-500 transition-all">WP Web Plugins</a></li>
+                            <li><a href="#catalog" class="hover:text-brand-500 transition-all">Adobe Suite Toolkit</a>
+                            </li>
+                            <li><a href="#catalog" class="hover:text-brand-500 transition-all">Creative Assets</a></li>
+                            <li><a href="#catalog" class="hover:text-brand-500 transition-all">Free Tools Library</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-4">Support & Trust</h4>
+                        <ul class="space-y-2 text-xs text-gray-400">
+                            <li><a href="#features" class="hover:text-brand-500 transition-all">DMCA Clearance</a></li>
+                            <li><a href="#features" class="hover:text-brand-500 transition-all">License Terms</a></li>
+                            <li><a href="#features" class="hover:text-brand-500 transition-all">Refund Assurance</a>
+                            </li>
+                            <li><a href="#features" class="hover:text-brand-500 transition-all">Prosolver QA Core</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Meta Copyright area -->
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+                <p>&copy; 2026 ToolsKite. All Rights Reserved. Managed and Secured under <a href="https://prosolver.co"
+                        target="_blank" class="hover:text-brand-500 underline font-semibold">Prosolver HQ</a>.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:text-gray-300">Privacy Policy</a>
+                    <span>•</span>
+                    <a href="#" class="hover:text-gray-300">Terms of Use</a>
+                    <span>•</span>
+                    <a href="#" class="hover:text-gray-300 font-semibold text-brand-500">GPL Authenticated</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Widget (Bottom-Left to avoid overlap with cart details) -->
+    <a href="https://wa.me/880158164121?text=Hello%20ToolsKite%2C%20I%27m%20visiting%20your%20website%20and%20need%20some%20help!"
+        target="_blank" rel="noopener noreferrer"
+        class="fixed bottom-6 left-6 z-40 flex items-center gap-2.5 bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-3 rounded-full shadow-2xl transition-all duration-300 hover:scale-105 font-bold text-sm border border-emerald-500/20 active:scale-95 group">
+        <span class="relative flex h-3 w-3">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-100 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-400"></span>
+        </span>
+        <i class="fa-brands fa-whatsapp text-lg"></i>
+        <span>Chat with Us</span>
+    </a>
+
+    <script>
+        // Product Database Array
+        const products = [
+            {
+                id: 'p1',
+                title: 'Elementor Pro Extension Suite',
+                tagline: 'The world\'s leading WordPress visual builder premium license.',
+                category: 'web-tools',
+                isPremium: true,
+                price: 19.00,
+                version: 'v3.18.2',
+                downloads: '4,821',
+                icon: 'fa-cubes',
+                features: [
+                    'Full access to 100+ Professional widgets',
+                    'Advanced Theme Builder & WooCommerce layout editor',
+                    'Visual Loop Builder for dynamic custom query listings',
+                    '1-Year Direct Support validation via ToolsKite'
+                ]
+            },
+            {
+                id: 'p2',
+                title: 'CartFlows Pro Sales Funnel',
+                tagline: 'High-converting sales funnel builder for WooCommerce.',
+                category: 'web-tools',
+                isPremium: true,
+                price: 24.00,
+                version: 'v2.1.0',
+                downloads: '1,902',
+                icon: 'fa-arrows-split-up-and-left',
+                features: [
+                    'One-Click Upsells & Downsell triggers',
+                    'Premium pre-built modern landing templates',
+                    'A/B Split testing on landing layouts',
+                    'Fully Optimized frictionless Checkout systems'
+                ]
+            },
+            {
+                id: 'p3',
+                title: 'Adobe Photoshop Action presets',
+                tagline: 'Advanced non-destructive editorial grade photo actions.',
+                category: 'creative-tools',
+                isPremium: false,
+                price: 0.00,
+                version: 'v4.5',
+                downloads: '12,410',
+                icon: 'fa-wand-magic-sparkles',
+                features: [
+                    '50+ Dynamic high-contrast creative actions',
+                    'Fully compatible with Adobe CC suite apps',
+                    'Non-destructive styling templates included',
+                    'Extended Commercial license for standard agencies'
+                ]
+            },
+            {
+                id: 'p4',
+                title: 'Premiere Pro Motion Transitions',
+                tagline: 'Cinematic fluid camera motion transition kits.',
+                category: 'creative-tools',
+                isPremium: true,
+                price: 15.00,
+                version: 'v2.0',
+                downloads: '840',
+                icon: 'fa-video',
+                features: [
+                    '30+ Drag-and-drop smooth camera transitions',
+                    'Inbuilt cinematic sound effects cues',
+                    'Full HD, 4K, and Ultra-wide configuration sizes',
+                    'Detailed video instruction guidebook'
+                ]
+            },
+            {
+                id: 'p5',
+                title: 'Astra Premium Theme Bundle',
+                tagline: 'Lightweight & customizable premium WordPress template catalog.',
+                category: 'themes-templates',
+                isPremium: true,
+                price: 29.00,
+                version: 'v4.3.1',
+                downloads: '3,115',
+                icon: 'fa-palette',
+                features: [
+                    'Access to all 150+ starter templates & demos',
+                    'Fast responsive rendering code (under 0.5s loading)',
+                    'Deep integration compatibility with Elementor builder',
+                    'GPL license usage for unlimited client domains'
+                ]
+            },
+            {
+                id: 'p6',
+                title: 'Divi Creative Theme & Builder',
+                tagline: 'Flexible visual theme framework with custom designs.',
+                category: 'themes-templates',
+                isPremium: true,
+                price: 29.00,
+                version: 'v4.22',
+                downloads: '2,900',
+                icon: 'fa-border-none',
+                features: [
+                    'Full layout packs and premium layout modules',
+                    'Inbuilt custom split testing modules',
+                    'GPL Lifetime activation keys generated instantly',
+                    'Full compatibility with standard plugins'
+                ]
+            },
+            {
+                id: 'p7',
+                title: 'After Effects Cyberpunk Title Presets',
+                tagline: 'Modern neon cyberpunk title animations.',
+                category: 'creative-tools',
+                isPremium: false,
+                price: 0.00,
+                version: 'v1.2',
+                downloads: '7,150',
+                icon: 'fa-clapperboard',
+                features: [
+                    '15 Glitch title templates in futuristic styling',
+                    'No external plugins or components required',
+                    'Font list and styling resources package included',
+                    'Fully customisable timing and coloring keys'
+                ]
+            },
+            {
+                id: 'p8',
+                title: 'WooCommerce Custom Checkout Booster',
+                tagline: 'Fast multi-step checkout plugin with dynamic indicators.',
+                category: 'web-tools',
+                isPremium: true,
+                price: 12.00,
+                version: 'v1.4.2',
+                downloads: '942',
+                icon: 'fa-basket-shopping',
+                features: [
+                    'Convert WooCommerce cart into multi-step elegant bars',
+                    'In-built order bump and progress metrics options',
+                    'Pre-configured designs for minimal styled templates',
+                    'Optimised mobile viewport responsive UI layers'
+                ]
+            }
+        ];
+
+        // Web Application State variables
+        let cart = [];
+        let activeFilter = 'all';
+        let priceFilter = 'all';
+        let searchQuery = '';
+        let couponApplied = false;
+        const couponDiscountRate = 0.5; // 50% discount
+
+        window.onload = function () {
+            renderProducts();
+            updateCartBadge();
+        };
+
+        // Show dynamic toast notifications
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `flex items-center gap-3 p-4 rounded-xl shadow-xl border text-sm transition-all duration-300 transform translate-y-2 opacity-0 bg-dark-800 ${type === 'success' ? 'border-brand-accent text-white' : 'border-brand-danger text-white'
+                }`;
+
+            const icon = type === 'success' ? 'fa-circle-check text-brand-accent' : 'fa-triangle-exclamation text-brand-danger';
+
+            toast.innerHTML = `
             <i class="fa-solid ${icon} text-lg"></i>
             <span class="font-medium">${message}</span>
         `;
-        
-        container.appendChild(toast);
-        
-        // Trigger Animation
-        setTimeout(() => {
-            toast.classList.remove('translate-y-2', 'opacity-0');
-        }, 10);
 
-        // Auto remove
-        setTimeout(() => {
-            toast.classList.add('translate-y-2', 'opacity-0');
+            container.appendChild(toast);
+
+            // Trigger Animation
             setTimeout(() => {
-                toast.remove();
-            }, 300);
-        }, 3000);
-    }
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 10);
 
-    function renderProducts() {
-        const grid = document.getElementById('products-grid');
-        const emptyState = document.getElementById('no-products-state');
-        grid.innerHTML = '';
-
-        // Apply filters
-        const filtered = products.filter(product => {
-            const matchesCategory = activeFilter === 'all' || product.category === activeFilter;
-            
-            let matchesPricing = true;
-            if (priceFilter === 'premium') matchesPricing = product.isPremium;
-            if (priceFilter === 'free') matchesPricing = !product.isPremium;
-
-            const matchesSearch = product.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                                  product.tagline.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                                  product.category.toLowerCase().includes(searchQuery.toLowerCase());
-
-            return matchesCategory && matchesPricing && matchesSearch;
-        });
-
-        // Toggle Empty state visual indicators
-        if (filtered.length === 0) {
-            grid.classList.add('hidden');
-            emptyState.classList.remove('hidden');
-            return;
-        } else {
-            grid.classList.remove('hidden');
-            emptyState.classList.add('hidden');
+            // Auto remove
+            setTimeout(() => {
+                toast.classList.add('translate-y-2', 'opacity-0');
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 3000);
         }
 
-        // Render Cards
-        filtered.forEach(product => {
-            const isAdded = cart.some(item => item.id === product.id);
-            const card = document.createElement('div');
-            card.className = "flex flex-col justify-between p-6 rounded-2xl bg-dark-800/80 border border-gray-800 hover:border-brand-500/50 transition-all duration-300 relative group overflow-hidden";
-            
-            // Render Badge HTML
-            const badgeHtml = product.isPremium 
-                ? `<span class="px-2.5 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-100 text-[10px] font-bold uppercase tracking-wider">Premium Deal</span>`
-                : `<span class="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-brand-accent text-[10px] font-bold uppercase tracking-wider">Freebie</span>`;
+        function renderProducts() {
+            const grid = document.getElementById('products-grid');
+            const emptyState = document.getElementById('no-products-state');
+            grid.innerHTML = '';
 
-            card.innerHTML = `
+            // Apply filters
+            const filtered = products.filter(product => {
+                const matchesCategory = activeFilter === 'all' || product.category === activeFilter;
+
+                let matchesPricing = true;
+                if (priceFilter === 'premium') matchesPricing = product.isPremium;
+                if (priceFilter === 'free') matchesPricing = !product.isPremium;
+
+                const matchesSearch = product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    product.tagline.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    product.category.toLowerCase().includes(searchQuery.toLowerCase());
+
+                return matchesCategory && matchesPricing && matchesSearch;
+            });
+
+            // Toggle Empty state visual indicators
+            if (filtered.length === 0) {
+                grid.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+                return;
+            } else {
+                grid.classList.remove('hidden');
+                emptyState.classList.add('hidden');
+            }
+
+            // Render Cards
+            filtered.forEach(product => {
+                const isAdded = cart.some(item => item.id === product.id);
+                const card = document.createElement('div');
+                card.className = "flex flex-col justify-between p-6 rounded-2xl bg-dark-800/80 border border-gray-800 hover:border-brand-500/50 transition-all duration-300 relative group overflow-hidden";
+
+                // Render Badge HTML
+                const badgeHtml = product.isPremium
+                    ? `<span class="px-2.5 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-100 text-[10px] font-bold uppercase tracking-wider">Premium Deal</span>`
+                    : `<span class="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-brand-accent text-[10px] font-bold uppercase tracking-wider">Freebie</span>`;
+
+                card.innerHTML = `
                 <div>
                     <!-- Card Top stats and badge -->
                     <div class="flex justify-between items-center mb-4">
@@ -857,142 +971,141 @@
                         </button>
                         <button 
                             onclick="${isAdded ? `toggleCartDrawer(true)` : `addToCart('${product.id}')`}"
-                            class="px-4 py-2.5 rounded-xl font-bold text-xs transition-all ${
-                                isAdded 
-                                ? 'bg-emerald-500/15 border border-emerald-500 text-brand-accent hover:bg-emerald-500 hover:text-white' 
-                                : 'bg-brand-600 hover:bg-brand-700 text-white shadow-md shadow-brand-600/10'
-                            }">
+                            class="px-4 py-2.5 rounded-xl font-bold text-xs transition-all ${isAdded
+                        ? 'bg-emerald-500/15 border border-emerald-500 text-brand-accent hover:bg-emerald-500 hover:text-white'
+                        : 'bg-brand-600 hover:bg-brand-700 text-white shadow-md shadow-brand-600/10'
+                    }">
                             ${isAdded ? '<i class="fa-solid fa-check"></i> Added' : '<i class="fa-solid fa-cart-plus"></i> Get'}
                         </button>
                     </div>
                 </div>
             `;
-            grid.appendChild(card);
-        });
-    }
-
-    function filterCategory(cat) {
-        activeFilter = cat;
-        // Adjust style active indicators
-        document.querySelectorAll('#category-filters button').forEach(btn => {
-            btn.classList.remove('bg-brand-600', 'text-white', 'shadow-md');
-            btn.classList.add('bg-dark-800', 'text-gray-400', 'border', 'border-gray-800');
-        });
-        const activeBtn = document.getElementById(`cat-${cat}`);
-        activeBtn.classList.remove('bg-dark-800', 'text-gray-400', 'border-gray-800');
-        activeBtn.classList.add('bg-brand-600', 'text-white', 'shadow-md');
-
-        renderProducts();
-    }
-
-    function filterPricing(pType) {
-        priceFilter = pType;
-        document.querySelectorAll('.pricing-btn').forEach(btn => {
-            btn.classList.remove('bg-brand-500/10', 'text-brand-100');
-            btn.classList.add('text-gray-400');
-        });
-        const currentBtn = pType === 'all' ? document.getElementById('toggle-all-pricing') : 
-                           pType === 'premium' ? document.getElementById('toggle-paid') : document.getElementById('toggle-free');
-        currentBtn.classList.add('bg-brand-500/10', 'text-brand-100');
-        currentBtn.classList.remove('text-gray-400');
-
-        renderProducts();
-    }
-
-    function handleSearch(val) {
-        searchQuery = val;
-        const statusBlock = document.getElementById('filter-status');
-        const queryText = document.getElementById('filter-query-text');
-
-        if (val.trim() !== '') {
-            statusBlock.classList.remove('hidden');
-            queryText.textContent = `"${val}"`;
-        } else {
-            statusBlock.classList.add('hidden');
+                grid.appendChild(card);
+            });
         }
-        renderProducts();
-    }
 
-    function applySearchTag(tag) {
-        const input = document.getElementById('hero-search');
-        input.value = tag;
-        handleSearch(tag);
-        scrollToCatalog();
-    }
+        function filterCategory(cat) {
+            activeFilter = cat;
+            // Adjust style active indicators
+            document.querySelectorAll('#category-filters button').forEach(btn => {
+                btn.classList.remove('bg-brand-600', 'text-white', 'shadow-md');
+                btn.classList.add('bg-dark-800', 'text-gray-400', 'border', 'border-gray-800');
+            });
+            const activeBtn = document.getElementById(`cat-${cat}`);
+            activeBtn.classList.remove('bg-dark-800', 'text-gray-400', 'border-gray-800');
+            activeBtn.classList.add('bg-brand-600', 'text-white', 'shadow-md');
 
-    function resetSearchAndFilters() {
-        document.getElementById('hero-search').value = '';
-        searchQuery = '';
-        document.getElementById('filter-status').classList.add('hidden');
-        filterCategory('all');
-        filterPricing('all');
-    }
+            renderProducts();
+        }
 
-    function scrollToCatalog() {
-        document.getElementById('catalog').scrollIntoView({ behavior: 'smooth' });
-    }
+        function filterPricing(pType) {
+            priceFilter = pType;
+            document.querySelectorAll('.pricing-btn').forEach(btn => {
+                btn.classList.remove('bg-brand-500/10', 'text-brand-100');
+                btn.classList.add('text-gray-400');
+            });
+            const currentBtn = pType === 'all' ? document.getElementById('toggle-all-pricing') :
+                pType === 'premium' ? document.getElementById('toggle-paid') : document.getElementById('toggle-free');
+            currentBtn.classList.add('bg-brand-500/10', 'text-brand-100');
+            currentBtn.classList.remove('text-gray-400');
 
-    function addToCart(id) {
-        const product = products.find(p => p.id === id);
-        if (product && !cart.some(item => item.id === id)) {
-            cart.push(product);
+            renderProducts();
+        }
+
+        function handleSearch(val) {
+            searchQuery = val;
+            const statusBlock = document.getElementById('filter-status');
+            const queryText = document.getElementById('filter-query-text');
+
+            if (val.trim() !== '') {
+                statusBlock.classList.remove('hidden');
+                queryText.textContent = `"${val}"`;
+            } else {
+                statusBlock.classList.add('hidden');
+            }
+            renderProducts();
+        }
+
+        function applySearchTag(tag) {
+            const input = document.getElementById('hero-search');
+            input.value = tag;
+            handleSearch(tag);
+            scrollToCatalog();
+        }
+
+        function resetSearchAndFilters() {
+            document.getElementById('hero-search').value = '';
+            searchQuery = '';
+            document.getElementById('filter-status').classList.add('hidden');
+            filterCategory('all');
+            filterPricing('all');
+        }
+
+        function scrollToCatalog() {
+            document.getElementById('catalog').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            if (product && !cart.some(item => item.id === id)) {
+                cart.push(product);
+                updateCartBadge();
+                renderProducts();
+                renderCartItems();
+                showToast(`"${product.title}" added to your tools suite!`, 'success');
+            }
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
             updateCartBadge();
             renderProducts();
             renderCartItems();
-            showToast(`"${product.title}" added to your tools suite!`, 'success');
+            showToast('Item removed from cart.', 'danger');
         }
-    }
 
-    function removeFromCart(id) {
-        cart = cart.filter(item => item.id !== id);
-        updateCartBadge();
-        renderProducts();
-        renderCartItems();
-        showToast('Item removed from cart.', 'danger');
-    }
-
-    function updateCartBadge() {
-        const badge = document.getElementById('cart-badge');
-        if (cart.length > 0) {
-            badge.textContent = cart.length;
-            badge.classList.remove('hidden');
-        } else {
-            badge.classList.add('hidden');
+        function updateCartBadge() {
+            const badge = document.getElementById('cart-badge');
+            if (cart.length > 0) {
+                badge.textContent = cart.length;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
         }
-    }
 
-    function toggleCartDrawer(open) {
-        const drawer = document.getElementById('cart-drawer');
-        if (open) {
-            drawer.classList.remove('translate-x-full');
-            renderCartItems();
-        } else {
-            drawer.classList.add('translate-x-full');
+        function toggleCartDrawer(open) {
+            const drawer = document.getElementById('cart-drawer');
+            if (open) {
+                drawer.classList.remove('translate-x-full');
+                renderCartItems();
+            } else {
+                drawer.classList.add('translate-x-full');
+            }
         }
-    }
 
-    function renderCartItems() {
-        const container = document.getElementById('cart-items');
-        container.innerHTML = '';
+        function renderCartItems() {
+            const container = document.getElementById('cart-items');
+            container.innerHTML = '';
 
-        if (cart.length === 0) {
-            container.innerHTML = `
+            if (cart.length === 0) {
+                container.innerHTML = `
                 <div class="flex flex-col items-center justify-center h-full text-center py-10">
                     <i class="fa-solid fa-shopping-cart text-gray-600 text-4xl mb-4"></i>
                     <p class="text-sm text-gray-300 font-bold">Your kite is currently empty</p>
                     <p class="text-xs text-gray-500 mt-1">Explore our verified selection of premium templates and creative components.</p>
                 </div>
             `;
-            updateCheckoutTotals(0);
-            return;
-        }
+                updateCheckoutTotals(0);
+                return;
+            }
 
-        let total = 0;
-        cart.forEach(item => {
-            total += item.price;
-            const itemRow = document.createElement('div');
-            itemRow.className = "flex items-center justify-between gap-4 p-3.5 rounded-xl bg-dark-900 border border-gray-800";
-            itemRow.innerHTML = `
+            let total = 0;
+            cart.forEach(item => {
+                total += item.price;
+                const itemRow = document.createElement('div');
+                itemRow.className = "flex items-center justify-between gap-4 p-3.5 rounded-xl bg-dark-900 border border-gray-800";
+                itemRow.innerHTML = `
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-lg bg-dark-800 border border-gray-700 flex items-center justify-center text-sm text-brand-500">
                         <i class="fa-solid ${item.icon}"></i>
@@ -1009,141 +1122,142 @@
                     </button>
                 </div>
             `;
-            container.appendChild(itemRow);
-        });
+                container.appendChild(itemRow);
+            });
 
-        updateCheckoutTotals(total);
-    }
-
-    function updateCheckoutTotals(subtotal) {
-        document.getElementById('cart-count-val').textContent = `${cart.length} item(s)`;
-        
-        let discount = 0;
-        if (couponApplied) {
-            discount = subtotal * couponDiscountRate;
-            document.getElementById('cart-discount-val').textContent = `-$${discount.toFixed(2)} (50% Off)`;
-        } else {
-            document.getElementById('cart-discount-val').textContent = `$0.00`;
+            updateCheckoutTotals(total);
         }
 
-        const grandTotal = subtotal - discount;
-        document.getElementById('cart-total').textContent = `$${grandTotal.toFixed(2)}`;
-    }
+        function updateCheckoutTotals(subtotal) {
+            document.getElementById('cart-count-val').textContent = `${cart.length} item(s)`;
 
-    function applyCoupon() {
-        const input = document.getElementById('coupon-input').value.trim();
-        if (input.toUpperCase() === 'PROSOLVER50') {
-            couponApplied = true;
-            showToast('50% Off Brand Coupon applied successfully!', 'success');
-            renderCartItems();
-        } else {
-            showToast('Invalid Coupon or code has expired.', 'danger');
-        }
-    }
+            let discount = 0;
+            if (couponApplied) {
+                discount = subtotal * couponDiscountRate;
+                document.getElementById('cart-discount-val').textContent = `-$${discount.toFixed(2)} (50% Off)`;
+            } else {
+                document.getElementById('cart-discount-val').textContent = `$0.00`;
+            }
 
-    function executeCheckout() {
-        if (cart.length === 0) {
-            showToast('Your cart is empty. Please select products first.', 'danger');
-            return;
+            const grandTotal = subtotal - discount;
+            document.getElementById('cart-total').textContent = `$${grandTotal.toFixed(2)}`;
         }
 
-        showToast('Initiating Secure Purchase Pipeline...', 'success');
-        
-        // Simulating processing
-        setTimeout(() => {
-            showToast('Integration completed! Initialising direct drive download...', 'success');
+        function applyCoupon() {
+            const input = document.getElementById('coupon-input').value.trim();
+            if (input.toUpperCase() === 'PROSOLVER50') {
+                couponApplied = true;
+                showToast('50% Off Brand Coupon applied successfully!', 'success');
+                renderCartItems();
+            } else {
+                showToast('Invalid Coupon or code has expired.', 'danger');
+            }
+        }
+
+        function executeCheckout() {
+            if (cart.length === 0) {
+                showToast('Your cart is empty. Please select products first.', 'danger');
+                return;
+            }
+
+            showToast('Initiating Secure Purchase Pipeline...', 'success');
+
+            // Simulating processing
             setTimeout(() => {
-                const list = cart.map(item => `\n- ${item.title} (${item.version})`).join('');
-                alert(`SUCCESS:\nThank you for choosing ToolsKite by Prosolver HQ!\nYour order has been authorized. The system has initiated the secure compilation pipeline for:${list}\n\nOur service operations team will deliver your verified licenses to your profile email address.`);
-                cart = [];
-                couponApplied = false;
-                document.getElementById('coupon-input').value = '';
-                updateCartBadge();
-                renderProducts();
-                toggleCartDrawer(false);
-            }, 800);
-        }, 1200);
-    }
+                showToast('Integration completed! Initialising direct drive download...', 'success');
+                setTimeout(() => {
+                    const list = cart.map(item => `\n- ${item.title} (${item.version})`).join('');
+                    alert(`SUCCESS:\nThank you for choosing ToolsKite by Prosolver HQ!\nYour order has been authorized. The system has initiated the secure compilation pipeline for:${list}\n\nOur service operations team will deliver your verified licenses to your profile email address.`);
+                    cart = [];
+                    couponApplied = false;
+                    document.getElementById('coupon-input').value = '';
+                    updateCartBadge();
+                    renderProducts();
+                    toggleCartDrawer(false);
+                }, 800);
+            }, 1200);
+        }
 
-    function openProductModal(id) {
-        const product = products.find(p => p.id === id);
-        if (!product) return;
+        function openProductModal(id) {
+            const product = products.find(p => p.id === id);
+            if (!product) return;
 
-        document.getElementById('modal-product-icon').innerHTML = `<i class="fa-solid ${product.icon}"></i>`;
-        document.getElementById('modal-product-badge').textContent = product.isPremium ? 'Premium Standard Key' : 'Freebie';
-        document.getElementById('modal-product-badge').className = product.isPremium 
-            ? 'inline-block text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-brand-500/10 text-brand-100 mb-1 border border-brand-500/20'
-            : 'inline-block text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-emerald-500/10 text-brand-accent mb-1 border border-emerald-500/20';
-        
-        document.getElementById('modal-product-title').textContent = product.title;
-        document.getElementById('modal-product-tagline').textContent = product.tagline;
-        document.getElementById('modal-product-ver').textContent = product.version;
-        document.getElementById('modal-product-downloads').textContent = product.downloads;
-        document.getElementById('modal-product-price').textContent = product.isPremium ? `$${product.price.toFixed(2)}` : 'FREE';
+            document.getElementById('modal-product-icon').innerHTML = `<i class="fa-solid ${product.icon}"></i>`;
+            document.getElementById('modal-product-badge').textContent = product.isPremium ? 'Premium Standard Key' : 'Freebie';
+            document.getElementById('modal-product-badge').className = product.isPremium
+                ? 'inline-block text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-brand-500/10 text-brand-100 mb-1 border border-brand-500/20'
+                : 'inline-block text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-emerald-500/10 text-brand-accent mb-1 border border-emerald-500/20';
 
-        // Load Features dynamic elements
-        const featureList = document.getElementById('modal-product-features');
-        featureList.innerHTML = '';
-        product.features.forEach(feat => {
-            const li = document.createElement('li');
-            li.className = 'flex items-start gap-2';
-            li.innerHTML = `
+            document.getElementById('modal-product-title').textContent = product.title;
+            document.getElementById('modal-product-tagline').textContent = product.tagline;
+            document.getElementById('modal-product-ver').textContent = product.version;
+            document.getElementById('modal-product-downloads').textContent = product.downloads;
+            document.getElementById('modal-product-price').textContent = product.isPremium ? `$${product.price.toFixed(2)}` : 'FREE';
+
+            // Load Features dynamic elements
+            const featureList = document.getElementById('modal-product-features');
+            featureList.innerHTML = '';
+            product.features.forEach(feat => {
+                const li = document.createElement('li');
+                li.className = 'flex items-start gap-2';
+                li.innerHTML = `
                 <i class="fa-solid fa-circle-check text-brand-accent mt-0.5 flex-shrink-0 text-xs"></i>
                 <span>${feat}</span>
             `;
-            featureList.appendChild(li);
-        });
+                featureList.appendChild(li);
+            });
 
-        // CTA setup
-        const ctaBtn = document.getElementById('modal-product-action-btn');
-        const isAdded = cart.some(item => item.id === product.id);
-        
-        ctaBtn.innerHTML = isAdded ? '<i class="fa-solid fa-check"></i> Added' : '<i class="fa-solid fa-cart-plus"></i> Add To Suite';
-        ctaBtn.onclick = function() {
-            if (isAdded) {
-                toggleProductModal(false);
-                toggleCartDrawer(true);
-            } else {
-                addToCart(product.id);
-                toggleProductModal(false);
-                toggleCartDrawer(true);
-            }
-        };
+            // CTA setup
+            const ctaBtn = document.getElementById('modal-product-action-btn');
+            const isAdded = cart.some(item => item.id === product.id);
 
-        toggleProductModal(true);
-    }
+            ctaBtn.innerHTML = isAdded ? '<i class="fa-solid fa-check"></i> Added' : '<i class="fa-solid fa-cart-plus"></i> Add To Suite';
+            ctaBtn.onclick = function () {
+                if (isAdded) {
+                    toggleProductModal(false);
+                    toggleCartDrawer(true);
+                } else {
+                    addToCart(product.id);
+                    toggleProductModal(false);
+                    toggleCartDrawer(true);
+                }
+            };
 
-    function toggleProductModal(show) {
-        const modal = document.getElementById('product-modal');
-        if (show) {
-            modal.classList.remove('hidden');
-            document.body.classList.add('overflow-hidden');
-        } else {
-            modal.classList.add('hidden');
-            document.body.classList.remove('overflow-hidden');
+            toggleProductModal(true);
         }
-    }
 
-    // Responsive Mobile Menu Drawer Toggle
-    function toggleMobileMenu() {
-        const menu = document.getElementById('mobile-menu');
-        menu.classList.toggle('hidden');
-    }
+        function toggleProductModal(show) {
+            const modal = document.getElementById('product-modal');
+            if (show) {
+                modal.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden');
+            } else {
+                modal.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            }
+        }
 
-    // Dynamic contact submits
-    function handleContactSubmit(event) {
-        event.preventDefault();
-        const email = document.getElementById('contact-email').value;
-        const msg = document.getElementById('contact-msg').value;
+        // Responsive Mobile Menu Drawer Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
 
-        showToast('Submitting inquiry to Prosolver HQ servers...', 'success');
-        setTimeout(() => {
-            showToast('Success! Our engineers will contact you within 6 hours.', 'success');
-            document.getElementById('contact-email').value = '';
-            document.getElementById('contact-msg').value = '';
-        }, 1500);
-    }
-</script>
+        // Dynamic contact submits
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            const email = document.getElementById('contact-email').value;
+            const msg = document.getElementById('contact-msg').value;
+
+            showToast('Submitting inquiry to Prosolver HQ servers...', 'success');
+            setTimeout(() => {
+                showToast('Success! Our engineers will contact you within 6 hours.', 'success');
+                document.getElementById('contact-email').value = '';
+                document.getElementById('contact-msg').value = '';
+            }, 1500);
+        }
+    </script>
 
 </body>
+
 </html>
